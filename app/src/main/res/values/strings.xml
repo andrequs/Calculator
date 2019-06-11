@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">JAF Calculator</string>
+    <string name="txtNumber">номер пакету</string>
+    <string name="txtGrade">сорт</string>
+    <string name="txtQuantity">кількість шт.</string>
+    <string name="txtM3">кубатура м3</string>
+    <string name="txtShow">Показати</string>
+    <string name="txtNumPacket">№ пакету</string>
+    <string name="txtGradeEnter">вкажіть сорт</string>
+    <string name="txtQunti">шт</string>
+    <string name="txtM3s">m3</string>
+    <string name="txtWrite">зберегти</string>
+    <string name="txtCreate">створити пакет</string>
+    <string name="txtTovsh">товщина</string>
+    <string name="txtMM">мм</string>
+    <string name="txtLenght">довжина</string>
+    <string name="txtM">м</string>
+    <string name="txtWid">ширина</string>
+    <string name="txtCm">см</string>
+    <string name="txtQuntBoard">Кількість шт.</string>
+
+</resources>
