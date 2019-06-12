@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundwood"
     android:gravity="center"
-    tools:context="com.example.admin.nyproject.ui.MainActivity"
+    tools:context="com.example.admin.nyproject.MainActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="0dp">
 

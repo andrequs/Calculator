@@ -1,4 +1,4 @@
-package com.example.admin.nyproject.ui;
+package com.example.admin.nyproject;
 
 import android.content.Intent;
 import android.os.Bundle;
