@@ -15,8 +15,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COL_4 = "VOLUME";
 
 
-
-
     public DataBaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, null, 1);
 
@@ -42,7 +40,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String number, String grade, String quantity, String volume){
+    public boolean insertData(String number, String grade, String quantity, String volume) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, number);
@@ -59,18 +57,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getAllData (){
+    public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         return res;
     }
 
-    public Integer deleteData(String number ){
+    public Integer deleteData(String number) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "NUMBER = ?", new String[]{number});
     }
 
-    public boolean updateData(String number, String grade, String quantity, String volume){
+    public boolean updateData(String number, String grade, String quantity, String volume) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, number);
@@ -80,7 +78,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_NAME, contentValues, "NUMBER = ?", new String[]{number});
         return true;
     }
-
 
 
 }
