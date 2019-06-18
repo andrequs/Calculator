@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
@@ -12,10 +13,21 @@ import com.example.admin.nyproject.core.ui.BaseFragment;
 import com.example.admin.nyproject.main.MainContract;
 import com.example.admin.nyproject.main.presenter.MainPresenter;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainFragment extends BaseFragment implements MainContract.View {
+
+    @BindView(R.id.thicknessEditText)
+    EditText mThicknessEditText;
+
+    @BindView(R.id.lengthEditText)
+    EditText mLengthEditText;
+
+    @BindView(R.id.widthEditText)
+    EditText mWidthEditText;
 
     @LateInit
     private MainContract.Presenter mPresenter;
@@ -51,6 +63,23 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @Override
     protected void initView() {
 
+    }
+    //endregion
+
+    //region Click handlers
+    @OnClick(R.id.btnCreate)
+    void onCreateButtonClickListener() {
+        showToast("CREATE");
+    }
+
+    @OnClick(R.id.btnRestore)
+    void onRestoreButtonClickListener() {
+        showToast("RESTORE");
+    }
+
+    @OnClick(R.id.btnDelete)
+    void onDeleteButtonClickListener() {
+        showToast("DELETE");
     }
     //endregion
 }

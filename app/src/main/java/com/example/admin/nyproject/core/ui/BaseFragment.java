@@ -8,10 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.example.admin.nyproject.core.handlers.MessageHandler;
 
 import butterknife.Unbinder;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements MessageHandler {
 
     @Nullable
     private Unbinder mUnBinder;
@@ -45,6 +48,13 @@ public abstract class BaseFragment extends Fragment {
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
+    }
+    //endregion
+
+    //region MessageHandler
+    @Override
+    public void showToast(@NonNull String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
     //endregion
 }
