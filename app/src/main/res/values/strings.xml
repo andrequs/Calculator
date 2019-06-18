@@ -18,5 +18,10 @@
     <string name="txtWid">ширина</string>
     <string name="txtCm">см</string>
     <string name="txtQuntBoard">Кількість шт.</string>
+    <string name="txtErrorWid">Введіть ширину дошки</string>
+    <string name="txtErrorLen">Введіть довжину дошки</string>
+    <string name="txtErrorThickness">Введіть товщину дошки</string>
+    <string name="txtErrorLowWidth">Занадто вузька дошка</string>
+    <string name="txtErrorEmptyFields">Нема що видаляти!</string>
 
 </resources>
