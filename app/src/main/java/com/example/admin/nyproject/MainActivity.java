@@ -15,16 +15,16 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText enterTxt2;
-    EditText thicknessEnterField;
-    EditText enterTxt;
-    TextView resultTxt;
+    EditText widthEditText;
+    EditText thicknessEditText;
+    EditText lengthEditText;
+    TextView sumOfWidthTextView;
     TextView quantityView;
     ArrayList<Integer> spec;
     ArrayList<Integer> calcArr;
     ArrayList<Float> lenArr;
     TextView calcView;
-    TextView resultTxt2;
+    TextView widthArrayTextView;
     int widToInt;
 
     float lenPoint;
@@ -36,16 +36,16 @@ public class MainActivity extends AppCompatActivity {
         spec = new ArrayList<>();
         calcArr = new ArrayList<>();
         lenArr = new ArrayList<>();
-        enterTxt = findViewById(R.id.enterTxt);
-        resultTxt = findViewById(R.id.resultTxt);
-        enterTxt2 = findViewById(R.id.enterTxt2);
-        thicknessEnterField = findViewById(R.id.enterTxt3);
-        resultTxt = findViewById(R.id.resultTxt);
+        lengthEditText = findViewById(R.id.lengthEditText);
+        sumOfWidthTextView = findViewById(R.id.sumOfWidthTextView);
+        widthEditText = findViewById(R.id.widthEditText);
+        thicknessEditText = findViewById(R.id.thicknessEditText);
+        sumOfWidthTextView = findViewById(R.id.sumOfWidthTextView);
         calcView = findViewById(R.id.calcView);
         quantityView = findViewById(R.id.quantityView);
-        resultTxt2 = findViewById(R.id.resultTxt2);
+        widthArrayTextView = findViewById(R.id.widthArrayTextView);
 
-        textWatch(enterTxt2);
+        textWatch(widthEditText);
 
     }
 
@@ -54,24 +54,24 @@ public class MainActivity extends AppCompatActivity {
         int n = spec.size();
         int l = lenArr.size();
         int res;
-        if (n == 0) {
-            Toast.makeText(this, "Нема що видаляти!", Toast.LENGTH_SHORT).show();
-            resultTxt.setText("");
 
+        if (n == 0) {
+            showToast(this.getString(R.string.txtErrorEmptyFields));
+            sumOfWidthTextView.setText("");
         } else if (l == 0) {
-            Toast.makeText(this, "Нема що видаляти!", Toast.LENGTH_SHORT).show();
+            showToast(this.getString(R.string.txtErrorEmptyFields));
         } else if (n == 1)
             quantityView.setText("");
-        spec.remove(n - 1);
-
-
-        lenArr.remove(l - 1);
+        if(n > 0)
+            spec.remove(n - 1);
+        if(l > 0)
+            lenArr.remove(l - 1);
         int newN = spec.size();
-        resultTxt2.setText("");
-        resultTxt.setText("");
+        widthArrayTextView.setText("");
+        sumOfWidthTextView.setText("");
         for (int i = 0; i < newN; i++) {
             res = spec.get(i);
-            resultTxt2.append(res + "|");
+            widthArrayTextView.append(res + "|");
             calculate();
             quantityView.setText(String.valueOf(lenArr.size()));
 
@@ -83,31 +83,32 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < calcArr.size(); i++)
                 calcView.append(calcArr.get(i) + "+");
         }
+
     }
 
-    public void Onclick_add() {
-        String wid = enterTxt2.getText().toString();
-        String len = enterTxt.getText().toString();
-        String thickness = thicknessEnterField.getText().toString();
-        if (wid.equals("")) {
-            Toast.makeText(this, "Введіть ширину дошки", Toast.LENGTH_LONG).show();
+    public void add() {
+        String widthEditText = this.widthEditText.getText().toString();
+        String lengthEditText = this.lengthEditText.getText().toString();
+        String thickness = thicknessEditText.getText().toString();
+        if (widthEditText.equals("")) {
+            showToast(this.getString(R.string.txtErrorWid));
 
-        } else if (len.equals("")) {
-            Toast.makeText(this, "Введіть довжину дошки", Toast.LENGTH_LONG).show();
+        } else if (lengthEditText.equals("")) {
+            showToast(this.getString(R.string.txtErrorLen));
 
         } else if (thickness.equals("")) {
-            Toast.makeText(this, "Введіть товщину дошки", Toast.LENGTH_LONG).show();
+            showToast(this.getString(R.string.txtErrorThickness));
 
-        } else if (wid.length() <= 1) {
-            Toast.makeText(this, "Занадто вузька дошка!", Toast.LENGTH_SHORT).show();
+        } else if (widthEditText.length() <= 1) {
+            showToast(this.getString(R.string.txtErrorLowWidth));
         } else {
             // TODO: 12.06.2019 Handle NumberFormatException
-            widToInt = Integer.parseInt(wid);
-            lenPoint = Float.parseFloat(len);
+            widToInt = Integer.parseInt(widthEditText);
+            lenPoint = Float.parseFloat(lengthEditText);
             lenArr.add(lenPoint);
             spec.add(widToInt);
             calcArr.add(widToInt);
-            enterTxt2.setText("");
+            this.widthEditText.setText("");
             String sizeStr = String.valueOf(spec.size());
             quantityView.setText(sizeStr);
             calculate();
@@ -121,37 +122,37 @@ public class MainActivity extends AppCompatActivity {
         spec.clear();
         calcArr.clear();
         lenArr.clear();
-        resultTxt.setText("");
+        sumOfWidthTextView.setText("");
         quantityView.setText("");
-        resultTxt2.setText("");
+        widthArrayTextView.setText("");
         calcView.setText("");
     }
 
     public void OnClick_btnCreate(View v) {
-        String m3 = resultTxt.getText().toString();
+        String m3 = sumOfWidthTextView.getText().toString();
         String qunt = quantityView.getText().toString();
         Intent intent = new Intent(this, SaveActivity.class);
         intent.putExtra("DATA_M3", m3);
         intent.putExtra("DATA_QUNT", qunt);
         startActivity(intent);
+
     }
 
     //===========================  Методи       ========================================
     private void calculate() {
 
-        String thickness = thicknessEnterField.getText().toString();
-        float thiknessFL = Float.parseFloat(thickness);
-        String len = enterTxt.getText().toString();
+        String thickness = thicknessEditText.getText().toString();
+        float thiсknessFL = Float.parseFloat(thickness);
         float lenFromArr;
         float sum1 = 0;
         float sum;
         for (int i = 0; i < spec.size(); i++) {
             sum = spec.get(i);
             lenFromArr = lenArr.get(i);
-            sum1 = sum1 + (lenFromArr * (sum / 100) * (thiknessFL / 1000));
+            sum1 = sum1 + (lenFromArr * (sum / 100) * (thiсknessFL / 1000));
         }
 
-        resultTxt.setText(/*" м3" + '\n'+ */String.valueOf(sum1));
+        sumOfWidthTextView.setText(/*" м3" + '\n'+ */String.valueOf(sum1));
     }
 
     private void showPushDigit() {
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < spec.size(); i++) {
             num = spec.get(i);
             numStr = numStr + num + "|";
-            resultTxt2.setText(numStr);
+            widthArrayTextView.setText(numStr);
 
         }
     }
@@ -196,10 +197,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() == 2)
-                    Onclick_add();
+                    add();
             }
         });
 
+    }
+
+    public void showToast(String toast){
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
     }
 }
 

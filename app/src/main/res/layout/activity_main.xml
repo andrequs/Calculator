@@ -11,7 +11,7 @@
     tools:layout_editor_absoluteY="0dp">
 
     <EditText
-        android:id="@+id/enterTxt3"
+        android:id="@+id/thicknessEditText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ems="10"
@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/thicknessTextView"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imgBtnDel"
+        android:id="@+id/btnDelete"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
@@ -49,19 +49,21 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="right"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
         android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:background="@drawable/btndelete"
         android:onClick="Onclick_delete"
         android:state_pressed="true"
-        app:layout_constraintBottom_toTopOf="@+id/resultTxt2"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreate"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantityTextView"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/thicknessTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -72,29 +74,29 @@
         android:textStyle="bold|italic"
         android:typeface="serif"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/enterTxt3"
+        app:layout_constraintEnd_toStartOf="@+id/thicknessEditText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <EditText
-        android:id="@+id/enterTxt"
+        android:id="@+id/lengthEditText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center_horizontal"
         android:hint="@string/txtM"
-        android:inputType="number"
-        android:maxLength="2"
+        android:inputType="numberDecimal"
+        android:maxLength="3"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:typeface="serif"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/lengthTextView"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <ImageButton
-        android:id="@+id/imgCreate"
+        android:id="@+id/btnCreate"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
@@ -102,17 +104,20 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="right"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/btncreate"
         android:onClick="OnClick_btnCreate"
         android:state_pressed="true"
-        app:layout_constraintBottom_toTopOf="@+id/imgBtnDel"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/btnRestore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDelete"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/enterTxt2"
+        android:id="@+id/widthEditText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ems="10"
@@ -126,11 +131,11 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/widthTextView"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/lengthTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
@@ -140,7 +145,7 @@
         android:textStyle="bold|italic"
         android:typeface="serif"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toStartOf="@+id/enterTxt"
+        app:layout_constraintEnd_toStartOf="@+id/lengthEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
@@ -148,6 +153,8 @@
         android:id="@+id/quantityView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:gravity="center"
         android:textColor="@android:color/background_dark"
         android:textSize="25sp"
@@ -156,12 +163,11 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        tools:text="250" />
+        app:layout_constraintStart_toEndOf="@+id/quantityTextView"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <TextView
-        android:id="@+id/resultTxt2"
+        android:id="@+id/widthArrayTextView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
@@ -185,7 +191,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/resultTxt"
+        android:id="@+id/sumOfWidthTextView"
         android:layout_width="100dp"
         android:layout_height="37dp"
         android:layout_alignParentTop="true"
@@ -206,7 +212,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imgRefresh"
+        android:id="@+id/btnRestore"
         android:layout_width="61dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
@@ -214,18 +220,19 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="right"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
         android:background="@drawable/btnrefresh"
         android:contentDescription="TODO"
         android:onClick="Onclick_reset"
         android:state_pressed="true"
-        app:layout_constraintBottom_toTopOf="@+id/imgCreate"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/widthArrayTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCreate" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/widthTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
@@ -237,16 +244,18 @@
         android:textStyle="bold|italic"
         android:typeface="serif"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintEnd_toStartOf="@+id/enterTxt2"
+        app:layout_constraintEnd_toStartOf="@+id/widthEditText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/quantityTextView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:gravity="center"
         android:text="@string/txtQuntBoard"
         android:textColor="#FFEB3B"
@@ -255,9 +264,9 @@
         android:typeface="serif"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/quantityView"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -293,6 +302,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.41" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="206dp" />
 
 
 </android.support.constraint.ConstraintLayout>
