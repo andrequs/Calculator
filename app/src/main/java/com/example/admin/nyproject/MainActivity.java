@@ -1,9 +1,8 @@
 package com.example.admin.nyproject;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -11,220 +10,179 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText enterTxt2;
-    EditText thicknessEnterField;
-    EditText enterTxt;
-    TextView resultTxt;
+    EditText widthEditText;
+    EditText thicknessEditText;
+    EditText lengthEditText;
+    TextView sumOfWidthTextView;
     TextView quantityView;
-    ArrayList <Integer> spec;
+    ArrayList<Integer> spec;
     ArrayList<Integer> calcArr;
     ArrayList<Float> lenArr;
     TextView calcView;
-    TextView resultTxt2;
+    TextView widthArrayTextView;
     int widToInt;
-    Float lenToint;
-    boolean exit = false;
 
-
+    float lenPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         spec = new ArrayList<>();
         calcArr = new ArrayList<>();
         lenArr = new ArrayList<>();
-        enterTxt =  findViewById(R.id.enterTxt);
-        resultTxt = findViewById(R.id.resultTxt);
-        enterTxt2 =  findViewById(R.id.enterTxt2);
-        thicknessEnterField =  findViewById(R.id.enterTxt3);
-        resultTxt = findViewById(R.id.resultTxt);
+        lengthEditText = findViewById(R.id.lengthEditText);
+        sumOfWidthTextView = findViewById(R.id.sumOfWidthTextView);
+        widthEditText = findViewById(R.id.widthEditText);
+        thicknessEditText = findViewById(R.id.thicknessEditText);
+        sumOfWidthTextView = findViewById(R.id.sumOfWidthTextView);
         calcView = findViewById(R.id.calcView);
         quantityView = findViewById(R.id.quantityView);
-        resultTxt2 = findViewById(R.id.resultTxt2);
+        widthArrayTextView = findViewById(R.id.widthArrayTextView);
 
-        textWatch(enterTxt2);
+        textWatch(widthEditText);
 
     }
 
-    public void Onclick_delete(View v){
+    public void Onclick_delete(View v) {
         int r = calcArr.size();
         int n = spec.size();
         int l = lenArr.size();
         int res;
-        try {
-                if (n == 0){
-                    Toast.makeText(this, "Нема що видаляти!", Toast.LENGTH_SHORT).show();
-                    resultTxt.setText("");
 
-                } else if (l == 0){
-                    Toast.makeText(this, "Нема що видаляти!", Toast.LENGTH_SHORT).show();
-                    int sound = R.raw.warning;
-
-                } else
-                    if(n == 1)
-                         quantityView.setText("");
-                    spec.remove(n - 1);
-
-
-                lenArr.remove(l - 1);
-                int newN= spec.size();
-                resultTxt2.setText("");
-                resultTxt.setText("");
-                for (int i=0;i < newN;i++){
-                    res = spec.get(i);
-                    resultTxt2.append( res +"|");
-                    calclulate();
-                    quantityView.setText(String.valueOf(lenArr.size()));
-
-                }
-
-                if(r != 0){
-                    calcArr.remove(r-1);
-                    calcView.setText("");
-                    for (int i=0;i < calcArr.size();i++)
-                        calcView.append(String.valueOf(calcArr.get(i))+ "+");
-
-
-                } else{
-
-                }
-
-
-
-                /*String thickness = thicknessEnterField.getText().toString();
-                float thiknessFL = Float.parseFloat(thickness);
-                String len = enterTxt.getText().toString();
-                float lenFromArr;
-                float sum1 = 0;
-                float sum;
-                for (int i = 0; i < spec.size(); i++) {
-                    sum = spec.get(i);
-                    lenFromArr = lenArr.get(i);
-                    sum1 = sum1 + (lenFromArr * (sum / 100) * (thiknessFL / 1000));
-                }
-                resultTxt.setText(" м3" + '\n' + String.valueOf(sum1));
-    */
-
-        }catch (RuntimeException e){
+        if (n == 0) {
+            showToast(this.getString(R.string.txtErrorEmptyFields));
+            sumOfWidthTextView.setText("");
+        } else if (l == 0) {
+            showToast(this.getString(R.string.txtErrorEmptyFields));
+        } else if (n == 1)
+            quantityView.setText("");
+        if(n > 0)
+            spec.remove(n - 1);
+        if(l > 0)
+            lenArr.remove(l - 1);
+        int newN = spec.size();
+        widthArrayTextView.setText("");
+        sumOfWidthTextView.setText("");
+        for (int i = 0; i < newN; i++) {
+            res = spec.get(i);
+            widthArrayTextView.append(res + "|");
+            calculate();
+            quantityView.setText(String.valueOf(lenArr.size()));
 
         }
 
+        if (r != 0) {
+            calcArr.remove(r - 1);
+            calcView.setText("");
+            for (int i = 0; i < calcArr.size(); i++)
+                calcView.append(calcArr.get(i) + "+");
+        }
 
     }
 
-    public void Onclick_add() {
-        String wid = enterTxt2.getText().toString();
-        String len = enterTxt.getText().toString();
-        String thickness = thicknessEnterField.getText().toString();
-        if(wid.equals("")){
-            Toast.makeText(this, "Введіть ширину дошки", Toast.LENGTH_LONG).show();
+    public void add() {
+        String widthEditText = this.widthEditText.getText().toString();
+        String lengthEditText = this.lengthEditText.getText().toString();
+        String thickness = thicknessEditText.getText().toString();
+        if (widthEditText.equals("")) {
+            showToast(this.getString(R.string.txtErrorWid));
 
-        }
+        } else if (lengthEditText.equals("")) {
+            showToast(this.getString(R.string.txtErrorLen));
 
+        } else if (thickness.equals("")) {
+            showToast(this.getString(R.string.txtErrorThickness));
 
-        else if(len.equals("")){
-            Toast.makeText(this, "Введіть довжину дошки", Toast.LENGTH_LONG).show();
-
-        } else if(thickness.equals("")){
-            Toast.makeText(this, "Введіть товщину дошки", Toast.LENGTH_LONG).show();
-
-        } else if (wid.length() <= 1){
-            int sound = R.raw.warning;
-
-            Toast.makeText(this, "Занадто вузька дошка!", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            widToInt = Integer.parseInt(wid);
-            lenToint = Float.parseFloat(len);
-            lenArr.add(lenToint);
+        } else if (widthEditText.length() <= 1) {
+            showToast(this.getString(R.string.txtErrorLowWidth));
+        } else {
+            // TODO: 12.06.2019 Handle NumberFormatException
+            widToInt = Integer.parseInt(widthEditText);
+            lenPoint = Float.parseFloat(lengthEditText);
+            lenArr.add(lenPoint);
             spec.add(widToInt);
             calcArr.add(widToInt);
-            enterTxt2.setText("");
+            this.widthEditText.setText("");
             String sizeStr = String.valueOf(spec.size());
             quantityView.setText(sizeStr);
-            calclulate();
+            calculate();
             showDownMenu();
             showPushDigit();
-
         }
     }
 
 
-    public void Onclick_reset (View view){
+    public void Onclick_reset(View view) {
         spec.clear();
         calcArr.clear();
         lenArr.clear();
-        resultTxt.setText("");
+        sumOfWidthTextView.setText("");
         quantityView.setText("");
-        resultTxt2.setText("");
+        widthArrayTextView.setText("");
         calcView.setText("");
     }
 
-    public void OnClick_btnCreate(View v){
-        String m3 = resultTxt.getText().toString();
+    public void OnClick_btnCreate(View v) {
+        String m3 = sumOfWidthTextView.getText().toString();
         String qunt = quantityView.getText().toString();
         Intent intent = new Intent(this, SaveActivity.class);
         intent.putExtra("DATA_M3", m3);
         intent.putExtra("DATA_QUNT", qunt);
         startActivity(intent);
 
-
     }
-    //===========================  Методи       ========================================
-    void calclulate() {
 
-        String thickness = thicknessEnterField.getText().toString();
-        float thiknessFL = Float.parseFloat(thickness);
-        String len = enterTxt.getText().toString();
+    //===========================  Методи       ========================================
+    private void calculate() {
+
+        String thickness = thicknessEditText.getText().toString();
+        float thiсknessFL = Float.parseFloat(thickness);
         float lenFromArr;
         float sum1 = 0;
         float sum;
         for (int i = 0; i < spec.size(); i++) {
             sum = spec.get(i);
             lenFromArr = lenArr.get(i);
-            sum1 = sum1 + (lenFromArr * (sum / 100) * (thiknessFL / 1000));
+            sum1 = sum1 + (lenFromArr * (sum / 100) * (thiсknessFL / 1000));
         }
 
-        resultTxt.setText(/*" м3" + '\n'+ */String.valueOf(sum1));
+        sumOfWidthTextView.setText(/*" м3" + '\n'+ */String.valueOf(sum1));
     }
 
-    private void showPushDigit (){
+    private void showPushDigit() {
         int num;
         int j = 0;
         String numStr = "";
-        for(int i = 0; i < calcArr.size();i++){
-            num =  calcArr.get(i);
-            numStr = numStr + String.valueOf(num) + "+";
-            if(calcArr.size() > 3){
+        for (int i = 0; i < calcArr.size(); i++) {
+            num = calcArr.get(i);
+            numStr = numStr + num + "+";
+            if (calcArr.size() > 3) {
                 calcArr.remove(j);
-                calcArr.set(j, calcArr.get(j+1));
+                calcArr.set(j, calcArr.get(j + 1));
             }
             calcView.setText(numStr);
 
         }
-
-
     }
-    private void showDownMenu () {
+
+    private void showDownMenu() {
         int num;
         String numStr = "";
         for (int i = 0; i < spec.size(); i++) {
             num = spec.get(i);
-            numStr = numStr + String.valueOf(num) + "|";
-            resultTxt2.setText(numStr);
+            numStr = numStr + num + "|";
+            widthArrayTextView.setText(numStr);
 
         }
     }
 
-    public void textWatch(EditText etExample){
+    private void textWatch(EditText etExample) {
         etExample.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -238,34 +196,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()== 2)
-                    Onclick_add();
+                if (s.length() == 2)
+                    add();
             }
-        }) ;
+        });
 
     }
 
-    /*private void playSound(int sound) {
-        if (mp != null) mp.release();
-        mp = MediaPlayer.create(this, sound);
-        mp.start();
-    }*/
-
-
-
-
-   /* private void showDigits (){
-        StringBuffer s = new StringBuffer();
-        for (int c:spec) {
-            s.append(c + '+');
-        }
-        calcView.setText(s.toString());
+    public void showToast(String toast){
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
     }
-    private void pushDigit(int sum) {
-        if (spec.size() > 7)
-            spec.remove(0);
-        spec.add(sum);
-    }*/
 }
 
 
