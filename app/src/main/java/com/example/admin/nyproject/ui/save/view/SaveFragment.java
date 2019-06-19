@@ -39,7 +39,7 @@ public class SaveFragment extends BaseFragment implements SaveContract.View {
     @LayoutRes
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_settings;
+        return R.layout.fragment_save;
     }
 
     @NonNull
