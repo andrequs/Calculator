@@ -9,10 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.admin.nyproject.App;
+import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.handlers.UiNavigation;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements UiNavigation {
+
+    @LateInit
+    protected App mApp;
 
     @LayoutRes
     protected abstract int getLayoutRes();
@@ -21,6 +26,9 @@ public abstract class BaseActivity extends AppCompatActivity implements UiNaviga
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mApp = (App) getApplication();
+
         setContentView(getLayoutRes());
     }
     //endregion
