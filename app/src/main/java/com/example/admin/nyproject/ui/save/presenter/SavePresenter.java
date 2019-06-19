@@ -1,8 +1,8 @@
-package com.example.admin.nyproject.save.presenter;
+package com.example.admin.nyproject.ui.save.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.example.admin.nyproject.save.SaveContract;
+import com.example.admin.nyproject.ui.save.SaveContract;
 
 public class SavePresenter implements SaveContract.Presenter {
 

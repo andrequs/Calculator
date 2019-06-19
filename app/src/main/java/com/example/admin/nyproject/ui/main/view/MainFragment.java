@@ -1,5 +1,6 @@
-package com.example.admin.nyproject.main.view;
+package com.example.admin.nyproject.ui.main.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -10,8 +11,9 @@ import android.widget.EditText;
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.ui.BaseFragment;
-import com.example.admin.nyproject.main.MainContract;
-import com.example.admin.nyproject.main.presenter.MainPresenter;
+import com.example.admin.nyproject.ui.MainJafNavigation;
+import com.example.admin.nyproject.ui.main.MainContract;
+import com.example.admin.nyproject.ui.main.presenter.MainPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +34,9 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @LateInit
     private MainContract.Presenter mPresenter;
 
+    @Nullable
+    private MainJafNavigation mNavigator;
+
     public static MainFragment newInstance() {
         Bundle args = new Bundle();
         MainFragment fragment = new MainFragment();
@@ -40,6 +45,14 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     }
 
     //region Fragment
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (getActivity() instanceof MainJafNavigation) {
+            mNavigator = ((MainJafNavigation) getActivity());
+        }
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +82,9 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     //region Click handlers
     @OnClick(R.id.btnCreate)
     void onCreateButtonClickListener() {
-        showToast("CREATE");
+        if (mNavigator != null) {
+            mNavigator.showSaveFragment();
+        }
     }
 
     @OnClick(R.id.btnRestore)

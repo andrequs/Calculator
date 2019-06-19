@@ -1,4 +1,4 @@
-package com.example.admin.nyproject.save.view;
+package com.example.admin.nyproject.ui.save.view;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -9,8 +9,8 @@ import android.view.View;
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.ui.BaseFragment;
-import com.example.admin.nyproject.save.SaveContract;
-import com.example.admin.nyproject.save.presenter.SavePresenter;
+import com.example.admin.nyproject.ui.save.SaveContract;
+import com.example.admin.nyproject.ui.save.presenter.SavePresenter;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

@@ -22,6 +22,8 @@ public abstract class BaseActivity extends AppCompatActivity implements UiNaviga
     @LayoutRes
     protected abstract int getLayoutRes();
 
+    protected abstract void initView();
+
     //region AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity implements UiNaviga
         mApp = (App) getApplication();
 
         setContentView(getLayoutRes());
+
+        initView();
     }
     //endregion
 
