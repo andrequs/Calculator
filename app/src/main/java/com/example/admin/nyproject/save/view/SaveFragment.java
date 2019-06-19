@@ -1,4 +1,4 @@
-package com.example.admin.nyproject.settings.view;
+package com.example.admin.nyproject.save.view;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -9,20 +9,20 @@ import android.view.View;
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.ui.BaseFragment;
-import com.example.admin.nyproject.settings.SettingsContract;
-import com.example.admin.nyproject.settings.presenter.SettingsPresenter;
+import com.example.admin.nyproject.save.SaveContract;
+import com.example.admin.nyproject.save.presenter.SavePresenter;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class SettingsFragment extends BaseFragment implements SettingsContract.View {
+public class SaveFragment extends BaseFragment implements SaveContract.View {
 
     @LateInit
-    private SettingsContract.Presenter mPresenter;
+    private SaveContract.Presenter mPresenter;
 
-    public static SettingsFragment newInstance() {
+    public static SaveFragment newInstance() {
         Bundle args = new Bundle();
-        SettingsFragment fragment = new SettingsFragment();
+        SaveFragment fragment = new SaveFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -31,7 +31,7 @@ public class SettingsFragment extends BaseFragment implements SettingsContract.V
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new SettingsPresenter(this);
+        mPresenter = new SavePresenter(this);
     }
     //endregion
 
