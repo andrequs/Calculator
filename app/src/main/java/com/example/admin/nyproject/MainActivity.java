@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         quantityView = findViewById(R.id.quantityView);
         widthArrayTextView = findViewById(R.id.widthArrayTextView);
 
+
+
         textWatch(widthEditText);
 
     }
@@ -200,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     add();
             }
         });
+
 
     }
 

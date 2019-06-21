@@ -49,16 +49,19 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="right"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:background="@drawable/btndelete"
         android:onClick="Onclick_delete"
         android:state_pressed="true"
         app:layout_constraintBottom_toTopOf="@+id/btnCreate"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/quantityTextView"
         tools:ignore="ContentDescription" />
 
@@ -104,17 +107,19 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="right"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/btncreate"
         android:onClick="OnClick_btnCreate"
         android:state_pressed="true"
         app:layout_constraintBottom_toTopOf="@+id/btnRestore"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDelete"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/btnDelete" />
 
     <EditText
         android:id="@+id/widthEditText"
@@ -168,8 +173,8 @@
 
     <TextView
         android:id="@+id/widthArrayTextView"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_width="386dp"
+        android:layout_height="128dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
@@ -178,17 +183,20 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="8dp"
         android:textColor="@android:color/background_dark"
         android:textSize="15sp"
         android:textStyle="bold"
         android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline17"
+        app:layout_constraintVertical_bias="0.879" />
 
     <TextView
         android:id="@+id/sumOfWidthTextView"
@@ -217,16 +225,22 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="right"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/btnrefresh"
         android:contentDescription="TODO"
         android:onClick="Onclick_reset"
         android:state_pressed="true"
         app:layout_constraintBottom_toTopOf="@+id/widthArrayTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCreate" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/btnCreate"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/widthTextView"
@@ -306,4 +320,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50121653" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="365dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="431dp" />
+
 </android.support.constraint.ConstraintLayout>

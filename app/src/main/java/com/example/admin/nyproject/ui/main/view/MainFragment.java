@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.admin.nyproject.Board;
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.ui.BaseFragment;
@@ -57,6 +58,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new MainPresenter(this);
+
     }
     //endregion
 
