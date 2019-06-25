@@ -2,31 +2,46 @@ package com.example.admin.nyproject.data.model;
 
 public class Board {
 
-    private float length;
-    private float width;
-    private float thickness;
+    private float mLength;
+    private float mWidth;
+    private float mThickness;
 
-    public  void setLength(float len){ this.length = len;}
-
-    public void setWidth(float wid){
-        this.width = wid;
+    public Board() {
     }
 
-    public void setThickness(float thick){
-        this.thickness = thick;
+    public Board(float length, float width, float thickness) {
+        mLength = length;
+        mWidth = width;
+        mThickness = thickness;
     }
 
-    public float getLength(){ return this.length;}
-
-    public float getWidth(){ return this.width;}
-
-    public float getThickness(){ return this.thickness;}
-
-
-    public float cubesOfBoard(){
-        float cubeOfBoard = length * (width/100) * (thickness/1000);
-        return cubeOfBoard;
+    //region Board
+    public void setLength(float length) {
+        mLength = length;
     }
 
+    public void setWidth(float width) {
+        mWidth = width;
+    }
 
+    public void setThickness(float thickness) {
+        mThickness = thickness;
+    }
+
+    public float getLength() {
+        return mLength;
+    }
+
+    public float getWidth() {
+        return mWidth;
+    }
+
+    public float getThickness() {
+        return mThickness;
+    }
+
+    public float cubesOfBoard() {
+        return mLength * (mWidth / 100) * (mThickness / 1000);
+    }
+    //endregion
 }
