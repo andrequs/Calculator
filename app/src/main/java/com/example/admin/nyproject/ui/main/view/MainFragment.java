@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.admin.nyproject.Board;
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.ui.BaseFragment;

@@ -1,4 +1,4 @@
-package com.example.admin.nyproject;
+package com.example.admin.nyproject.data.model;
 
 public class Board {
 
