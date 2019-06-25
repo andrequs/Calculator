@@ -1,11 +1,14 @@
 package com.example.admin.nyproject;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 
+import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.data.local.db.JafDatabase;
 
 public class App extends Application {
 
+    @LateInit
     private JafDatabase mJafDatabase;
 
     //region Application
@@ -17,6 +20,7 @@ public class App extends Application {
     //endregion
 
     //region App
+    @NonNull
     public JafDatabase getJafDatabase() {
         return mJafDatabase;
     }

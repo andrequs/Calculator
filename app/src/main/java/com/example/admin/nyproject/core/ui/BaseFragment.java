@@ -1,5 +1,6 @@
 package com.example.admin.nyproject.core.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -10,11 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.admin.nyproject.App;
+import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.handlers.MessageHandler;
 
 import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment implements MessageHandler {
+
+    @LateInit
+    protected App mApp;
 
     @Nullable
     private Unbinder mUnBinder;
@@ -28,6 +34,12 @@ public abstract class BaseFragment extends Fragment implements MessageHandler {
     protected abstract void initView();
 
     //region Fragment
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mApp = (App) context;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
