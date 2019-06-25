@@ -9,8 +9,11 @@ import android.view.View;
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.ui.BaseFragment;
+import com.example.admin.nyproject.data.model.SpecificationData;
 import com.example.admin.nyproject.ui.save.SaveContract;
 import com.example.admin.nyproject.ui.save.presenter.SavePresenter;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -31,7 +34,7 @@ public class SaveFragment extends BaseFragment implements SaveContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new SavePresenter(this);
+        mPresenter = new SavePresenter(this, mApp.getJafDatabase().jafDao());
     }
     //endregion
 
@@ -50,7 +53,14 @@ public class SaveFragment extends BaseFragment implements SaveContract.View {
 
     @Override
     protected void initView() {
+        mPresenter.loadSpecificationData();
+    }
+    //endregion
 
+    //region SaveContract.View
+    @Override
+    public void showSpecificationData(@NonNull List<SpecificationData> specificationData) {
+        // TODO: show data in RecyclerView
     }
     //endregion
 }
