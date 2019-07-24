@@ -6,9 +6,6 @@ public class Board {
     private float mWidth;
     private float mThickness;
 
-    public Board() {
-    }
-
     public Board(float length, float width, float thickness) {
         mLength = length;
         mWidth = width;
