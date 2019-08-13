@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
@@ -14,6 +17,7 @@ import com.example.admin.nyproject.core.ui.BaseFragment;
 import com.example.admin.nyproject.ui.MainJafNavigation;
 import com.example.admin.nyproject.ui.main.MainContract;
 import com.example.admin.nyproject.ui.main.presenter.MainPresenter;
+import com.example.admin.nyproject.utils.watcher.DefaultTextWatcher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,12 +25,6 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainFragment extends BaseFragment implements MainContract.View {
-
-    @BindView(R.id.thicknessEditText)
-    EditText mThicknessEditText;
-
-    @BindView(R.id.lengthEditText)
-    EditText mLengthEditText;
 
     @BindView(R.id.widthEditText)
     EditText mWidthEditText;
@@ -36,6 +34,17 @@ public class MainFragment extends BaseFragment implements MainContract.View {
 
     @Nullable
     private MainJafNavigation mNavigator;
+
+    @NonNull
+    private TextWatcher mWidthTextWatcher = new DefaultTextWatcher() {
+        @Override
+        public void afterTextChanged(@NonNull Editable editable) {
+            if (TextUtils.isEmpty(editable.toString())) {
+                return;
+            }
+            mPresenter.handleWidth(editable.toString());
+        }
+    };
 
     public static MainFragment newInstance() {
         Bundle args = new Bundle();
@@ -57,6 +66,18 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new MainPresenter(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mWidthEditText.addTextChangedListener(mWidthTextWatcher);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mWidthEditText.removeTextChangedListener(mWidthTextWatcher);
     }
     //endregion
 
@@ -95,6 +116,19 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @OnClick(R.id.btnDelete)
     void onDeleteButtonClickListener() {
         showToast("DELETE");
+    }
+    //endregion
+
+    //region MainContract.View
+    @Override
+    public void addWidth(int width) {
+        mWidthEditText.setText(null);
+        showToast("Width added :: " + width);
+    }
+
+    @Override
+    public void showWrongWidthError() {
+        showToast(R.string.text_main_fragment_wrong_width_format);
     }
     //endregion
 }

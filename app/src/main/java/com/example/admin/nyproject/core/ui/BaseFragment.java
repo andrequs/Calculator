@@ -68,5 +68,10 @@ public abstract class BaseFragment extends Fragment implements MessageHandler {
     public void showToast(@NonNull String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void showToast(int message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
     //endregion
 }

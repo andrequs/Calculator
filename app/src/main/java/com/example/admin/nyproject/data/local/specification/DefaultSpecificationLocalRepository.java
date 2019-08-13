@@ -1,6 +1,7 @@
 package com.example.admin.nyproject.data.local.specification;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.WorkerThread;
 
 import com.example.admin.nyproject.data.local.db.JafDao;
 import com.example.admin.nyproject.data.model.SpecificationData;
@@ -17,6 +18,7 @@ public class DefaultSpecificationLocalRepository implements SpecificationLocalRe
     }
 
     //region SpecificationLocalRepository
+    @WorkerThread
     @NonNull
     @Override
     public List<SpecificationData> getAllSpecification() {
