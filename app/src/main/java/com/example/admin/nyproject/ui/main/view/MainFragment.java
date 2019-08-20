@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
@@ -28,6 +29,15 @@ public class MainFragment extends BaseFragment implements MainContract.View {
 
     @BindView(R.id.widthEditText)
     EditText mWidthEditText;
+
+    @BindView(R.id.thicknessEditText)
+    EditText mThicknessEditText;
+
+    @BindView(R.id.lengthEditText)
+    EditText mLengthEditText;
+
+    @BindView(R.id.sumOfWidthTextView)
+    TextView mSumOfWidthTextView;
 
     @LateInit
     private MainContract.Presenter mPresenter;
@@ -122,13 +132,30 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     //region MainContract.View
     @Override
     public void addWidth(int width) {
-        mWidthEditText.setText(null);
-        showToast("Width added :: " + width);
+        mPresenter.calculate(mWidthEditText.getText().toString(),
+                mLengthEditText.getText().toString(),
+                mThicknessEditText.getText().toString());
     }
 
     @Override
     public void showWrongWidthError() {
         showToast(R.string.text_main_fragment_wrong_width_format);
+    }
+
+    @Override
+    public void setResultOfCalculation(@NonNull String result) {
+        mWidthEditText.setText(null);
+        mSumOfWidthTextView.setText(result);
+    }
+
+    @Override
+    public void showEmptyLengthError() {
+        showToast("Empty length");
+    }
+
+    @Override
+    public void showEmptyThicknessError() {
+        showToast("Empty Thickness");
     }
     //endregion
 }
