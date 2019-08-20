@@ -24,4 +24,7 @@
     <string name="txtErrorLowWidth">Занадто вузька дошка</string>
     <string name="txtErrorEmptyFields">Нема що видаляти!</string>
 
+    <!--#region MainFragment-->
+    <string name="text_main_fragment_wrong_width_format">Wrong width format</string>
+    <!--#endregion-->
 </resources>
