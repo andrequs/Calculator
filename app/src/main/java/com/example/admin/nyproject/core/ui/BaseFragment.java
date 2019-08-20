@@ -37,7 +37,9 @@ public abstract class BaseFragment extends Fragment implements MessageHandler {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mApp = (App) context;
+        if (getActivity() != null) {
+            mApp = (App) getActivity().getApplication();
+        }
     }
 
     @Nullable
