@@ -39,6 +39,9 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @BindView(R.id.sumOfWidthTextView)
     TextView mSumOfWidthTextView;
 
+    @BindView(R.id.quantityView)
+    TextView mQuantityTextView;
+
     @LateInit
     private MainContract.Presenter mPresenter;
 
@@ -125,6 +128,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
 
     @OnClick(R.id.btnDelete)
     void onDeleteButtonClickListener() {
+        mPresenter.deleteFromBoardsArray();
         showToast("DELETE");
     }
     //endregion
@@ -135,6 +139,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
         mPresenter.calculate(mWidthEditText.getText().toString(),
                 mLengthEditText.getText().toString(),
                 mThicknessEditText.getText().toString());
+
     }
 
     @Override
@@ -146,6 +151,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     public void setResultOfCalculation(@NonNull String result) {
         mWidthEditText.setText(null);
         mSumOfWidthTextView.setText(result);
+
     }
 
     @Override
@@ -156,6 +162,16 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @Override
     public void showEmptyThicknessError() {
         showToast("Empty Thickness");
+    }
+
+    @Override
+    public void showQuantityOfBoards(@NonNull String quantity) {
+        mQuantityTextView.setText(quantity);
+    }
+
+    @Override
+    public void showEmptyBoardListError() { showToast("Nothing to delete");
+
     }
     //endregion
 }
