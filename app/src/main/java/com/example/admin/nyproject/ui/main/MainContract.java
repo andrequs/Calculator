@@ -22,6 +22,8 @@ public interface MainContract {
         void showQuantityOfBoards(@NonNull String quantity);
 
         void showEmptyBoardListError();
+
+        void showBoardsList(@NonNull String list);
     }
 
     interface Presenter {
@@ -35,7 +37,7 @@ public interface MainContract {
 
         void deleteFromBoardsArray();
 
-
+        void getBoardsWidthList();
 
     }
 }

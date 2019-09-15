@@ -9,11 +9,9 @@ import com.example.admin.nyproject.ui.main.MainContract;
 import java.util.ArrayList;
 
 public class MainPresenter implements MainContract.Presenter {
-   /* private static final float MM_TO_METER = 1000f;
-    private static final float CM_TO_METER = 100f;*/
     private static final int MAX_LENGTH_OF_WIDTH = 2;
-    ArrayList <Board> boardsList = new ArrayList<Board>();
-    float result;
+    private ArrayList <Board> boardsList = new ArrayList<>();
+    private float result;
     @NonNull
     private MainContract.View mView;
 
@@ -41,12 +39,12 @@ public class MainPresenter implements MainContract.Presenter {
             float widthFloat = Float.parseFloat(width);
             addToBoardArray(widthFloat,lengthFloat,thicknessFloat);
             calcBoardsList();
-           // float sum = (widthFloat / CM_TO_METER) * lengthFloat * (thicknessFloat / MM_TO_METER);
             mView.setResultOfCalculation(String.valueOf(result));
             mView.showQuantityOfBoards(String.valueOf(boardsList.size()));
         } catch (NumberFormatException ignored) {
             mView.showWrongWidthError();
         }
+        getBoardsWidthList();
     }
 
     @Override
@@ -96,12 +94,24 @@ public class MainPresenter implements MainContract.Presenter {
             calcBoardsList();
             mView.setResultOfCalculation(String.valueOf(result));
             mView.showQuantityOfBoards(String.valueOf(boardsList.size()));
+            getBoardsWidthList();
         }
         if(boardsList.size() < 1){
             mView.showQuantityOfBoards("");
             mView.setResultOfCalculation("");
             mView.showEmptyBoardListError();
         }
+    }
+
+    @Override
+    public void getBoardsWidthList() {
+        String list = "";
+        for(int i = 0; boardsList.size() > i; i++){
+            list = list.concat(String.valueOf(boardsList.get(i).getWidth())).concat("|");
+        }
+        mView.showBoardsList(list);
+
+
     }
 
     //endregion

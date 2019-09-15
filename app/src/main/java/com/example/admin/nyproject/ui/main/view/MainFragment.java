@@ -42,6 +42,9 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @BindView(R.id.quantityView)
     TextView mQuantityTextView;
 
+    @BindView(R.id.widthArrayTextView)
+    TextView mWidthArrayTextView;
+
     @LateInit
     private MainContract.Presenter mPresenter;
 
@@ -173,5 +176,13 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     public void showEmptyBoardListError() { showToast("Nothing to delete");
 
     }
+
+    @Override
+    public void showBoardsList(@NonNull String list) {
+        mWidthArrayTextView.setText(list);
+
+    }
+
+
     //endregion
 }
