@@ -5,11 +5,12 @@ import android.support.annotation.NonNull;
 
 import com.example.admin.nyproject.data.model.Board;
 
+import java.io.IOException;
 
 
 public interface MainContract {
     interface View {
-        void addWidth(int width);
+        void addWidth(int width) throws IOException;
 
         void showWrongWidthError();
 
@@ -24,14 +25,15 @@ public interface MainContract {
         void showEmptyBoardListError();
 
         void showBoardsList(@NonNull String list);
+
     }
 
     interface Presenter {
-        void calculate(@NonNull String width, String length, String thickness);
+        void calculate(@NonNull String width, String length, String thickness) throws IOException;
 
         void handleWidth(@NonNull String width);
 
-        void addToBoardArray(float width, float lenth, float thickness);
+        void addToBoardArray(float width, float length, float thickness);
 
         void calcBoardsList();
 

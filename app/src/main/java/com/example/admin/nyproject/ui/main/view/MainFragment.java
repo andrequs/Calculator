@@ -15,10 +15,13 @@ import android.widget.TextView;
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.ui.BaseFragment;
+import com.example.admin.nyproject.data.model.DataSaver;
 import com.example.admin.nyproject.ui.MainJafNavigation;
 import com.example.admin.nyproject.ui.main.MainContract;
 import com.example.admin.nyproject.ui.main.presenter.MainPresenter;
 import com.example.admin.nyproject.utils.watcher.DefaultTextWatcher;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +53,8 @@ public class MainFragment extends BaseFragment implements MainContract.View {
 
     @Nullable
     private MainJafNavigation mNavigator;
+
+    private DataSaver dataSaver;
 
     @NonNull
     private TextWatcher mWidthTextWatcher = new DefaultTextWatcher() {
@@ -121,6 +126,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     void onCreateButtonClickListener() {
         if (mNavigator != null) {
             mNavigator.showSaveFragment();
+
         }
     }
 
@@ -138,7 +144,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
 
     //region MainContract.View
     @Override
-    public void addWidth(int width) {
+    public void addWidth(int width) throws IOException {
         mPresenter.calculate(mWidthEditText.getText().toString(),
                 mLengthEditText.getText().toString(),
                 mThicknessEditText.getText().toString());

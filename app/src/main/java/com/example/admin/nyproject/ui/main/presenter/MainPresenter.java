@@ -6,11 +6,12 @@ import android.text.TextUtils;
 import com.example.admin.nyproject.data.model.Board;
 import com.example.admin.nyproject.ui.main.MainContract;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainPresenter implements MainContract.Presenter {
     private static final int MAX_LENGTH_OF_WIDTH = 2;
-    private ArrayList <Board> boardsList = new ArrayList<>();
+    ArrayList <Board> boardsList = new ArrayList<>();
     private float result;
     @NonNull
     private MainContract.View mView;
@@ -45,6 +46,7 @@ public class MainPresenter implements MainContract.Presenter {
             mView.showWrongWidthError();
         }
         getBoardsWidthList();
+
     }
 
     @Override
@@ -54,7 +56,7 @@ public class MainPresenter implements MainContract.Presenter {
                 int value = Integer.parseInt(width);
                 mView.addWidth(value);
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | IOException e) {
             mView.showWrongWidthError();
         }
     }
@@ -113,6 +115,8 @@ public class MainPresenter implements MainContract.Presenter {
 
 
     }
+
+
 
     //endregion
 }
