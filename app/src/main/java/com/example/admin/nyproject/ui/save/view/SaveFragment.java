@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
@@ -15,13 +16,25 @@ import com.example.admin.nyproject.ui.save.presenter.SavePresenter;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class SaveFragment extends BaseFragment implements SaveContract.View {
 
+    @BindView(R.id.etM3)
+    EditText etm3;
+
+    @BindView(R.id.etQuantity)
+    EditText etQuantity;
+
     @LateInit
     private SaveContract.Presenter mPresenter;
+    String cubes;
+    String quantity;
+
+
 
     public static SaveFragment newInstance() {
         Bundle args = new Bundle();
@@ -35,14 +48,18 @@ public class SaveFragment extends BaseFragment implements SaveContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new SavePresenter(this, mApp.getJafDatabase().jafDao());
-    }
+        cubes = this.getArguments().getString("cubes");      //get your parameters
+        quantity = this.getArguments().getString("quantity");
+}
+
+
     //endregion
 
     //region BaseFragment
     @LayoutRes
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_save;
+        return R.layout.activity_save;
     }
 
     @NonNull
@@ -53,7 +70,29 @@ public class SaveFragment extends BaseFragment implements SaveContract.View {
 
     @Override
     protected void initView() {
+        etm3.setText(cubes);
+        etQuantity.setText(quantity);
         mPresenter.loadSpecificationData();
+    }
+    //endregion
+
+    //region Click handlers
+
+    @OnClick(R.id.btnWrite)
+    void onWriteButtonClickListener() {
+
+        showToast("write");
+    }
+
+    @OnClick(R.id.btnShowDb)
+    void onShowDbButtonClickListener() {
+
+        showToast("show");
+    }
+
+    @OnClick(R.id.btnDelete)
+    void onDeleteDbButtonClickListener(){
+        showToast("delete");
     }
     //endregion
 
@@ -62,5 +101,9 @@ public class SaveFragment extends BaseFragment implements SaveContract.View {
     public void showSpecificationData(@NonNull List<SpecificationData> specificationData) {
         // TODO: show data in RecyclerView
     }
+
+
+
+
     //endregion
 }

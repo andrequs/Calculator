@@ -15,6 +15,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         mJafDatabase = JafDatabase.getInstance(getApplicationContext());
     }
     //endregion
