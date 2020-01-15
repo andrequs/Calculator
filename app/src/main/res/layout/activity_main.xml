@@ -109,7 +109,7 @@
         android:layout_marginRight="28dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/btncreate"
-        android:onClick="OnClick_btnCreate"
+        android:onClick="Onclick_delete"
         android:state_pressed="true"
         app:layout_constraintBottom_toTopOf="@+id/btnRestore"
         app:layout_constraintEnd_toEndOf="parent"

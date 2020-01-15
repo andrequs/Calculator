@@ -3,13 +3,14 @@ package com.example.admin.nyproject.ui.main;
 import android.support.annotation.NonNull;
 
 
-import com.example.admin.nyproject.data.model.Board;
+
 
 import java.io.IOException;
 
 
 public interface MainContract {
     interface View {
+
         void addWidth(int width) throws IOException;
 
         void showWrongWidthError();
@@ -26,9 +27,11 @@ public interface MainContract {
 
         void showBoardsList(@NonNull String list);
 
+        void restoreData();
     }
 
     interface Presenter {
+
         void calculate(@NonNull String width, String length, String thickness) throws IOException;
 
         void handleWidth(@NonNull String width);
@@ -41,5 +44,6 @@ public interface MainContract {
 
         void getBoardsWidthList();
 
+        void restoreData();
     }
 }

@@ -1,15 +1,19 @@
 package com.example.admin.nyproject.data.model;
+import android.support.annotation.NonNull;
+
 
 public class Board {
     private static final float MM_TO_METER = 1000f;
     private static final float CM_TO_METER = 100f;
     private float width;
-    private float lenth;
+    private float length;
     private float thickess;
 
-    public Board (float mWidth, float mLenth, float mThickness){
+
+
+    public Board (@NonNull float mWidth, float mLenth, float mThickness){
         width = mWidth;
-        lenth = mLenth;
+        length = mLenth;
         thickess = mThickness;
     }
 
@@ -17,8 +21,8 @@ public class Board {
         return width;
     }
 
-    public float getLenth(){
-        return lenth;
+    public float getLength(){
+        return length;
     }
 
     public float getThickess(){

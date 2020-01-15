@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import com.example.admin.nyproject.data.model.SpecificationData;
 
 @Database(entities = {SpecificationData.class}, version = 1)
+
 public abstract class JafDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "Boards.db";

@@ -12,6 +12,7 @@ public interface SaveContract {
     interface View {
         void showSpecificationData(@NonNull List<SpecificationData> specificationData);
 
+
     }
 
     interface Presenter {

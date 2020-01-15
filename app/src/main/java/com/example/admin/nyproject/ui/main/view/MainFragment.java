@@ -5,30 +5,30 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.admin.nyproject.R;
 import com.example.admin.nyproject.core.annotation.LateInit;
 import com.example.admin.nyproject.core.ui.BaseFragment;
-import com.example.admin.nyproject.data.model.DataSaver;
 import com.example.admin.nyproject.ui.MainJafNavigation;
 import com.example.admin.nyproject.ui.main.MainContract;
 import com.example.admin.nyproject.ui.main.presenter.MainPresenter;
+import com.example.admin.nyproject.ui.save.view.SaveFragment;
 import com.example.admin.nyproject.utils.watcher.DefaultTextWatcher;
-
 import java.io.IOException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainFragment extends BaseFragment implements MainContract.View {
+
 
     @BindView(R.id.widthEditText)
     EditText mWidthEditText;
@@ -54,7 +54,13 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @Nullable
     private MainJafNavigation mNavigator;
 
-    private DataSaver dataSaver;
+    @NonNull
+    String cubesOfpacket;
+
+    @NonNull
+    String quantityOfBoars;
+
+
 
     @NonNull
     private TextWatcher mWidthTextWatcher = new DefaultTextWatcher() {
@@ -68,9 +74,11 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     };
 
     public static MainFragment newInstance() {
+
         Bundle args = new Bundle();
         MainFragment fragment = new MainFragment();
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -81,6 +89,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
         if (getActivity() instanceof MainJafNavigation) {
             mNavigator = ((MainJafNavigation) getActivity());
         }
+
     }
 
     @Override
@@ -126,12 +135,23 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     void onCreateButtonClickListener() {
         if (mNavigator != null) {
             mNavigator.showSaveFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("cubes", cubesOfpacket );
+            bundle.putString("quantity", quantityOfBoars);// set your parameteres
+
+            SaveFragment nextFragment = new SaveFragment();
+            nextFragment.setArguments(bundle);
+
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_activity_main_jaf_container, nextFragment).commit();
+
 
         }
     }
 
     @OnClick(R.id.btnRestore)
     void onRestoreButtonClickListener() {
+        restoreData();
         showToast("RESTORE");
     }
 
@@ -160,7 +180,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     public void setResultOfCalculation(@NonNull String result) {
         mWidthEditText.setText(null);
         mSumOfWidthTextView.setText(result);
-
+        cubesOfpacket = result;
     }
 
     @Override
@@ -176,6 +196,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @Override
     public void showQuantityOfBoards(@NonNull String quantity) {
         mQuantityTextView.setText(quantity);
+        quantityOfBoars = quantity;
     }
 
     @Override
@@ -187,6 +208,11 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     public void showBoardsList(@NonNull String list) {
         mWidthArrayTextView.setText(list);
 
+    }
+
+    @Override
+    public void restoreData(){
+        mPresenter.restoreData();
     }
 
 
