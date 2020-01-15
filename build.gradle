@@ -6,8 +6,10 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.5.3'
+
     }
+
 }
 
 allprojects {
@@ -17,6 +19,16 @@ allprojects {
     }
 }
 
+ext {
+    roomVersion = '1.0.0-beta02'
+}
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+
+
+
